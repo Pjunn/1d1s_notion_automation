@@ -7,7 +7,8 @@ from extract_name import extract_name
 
 _ = load_dotenv(find_dotenv())
 
-notion = Client(auth=os.environ["NOTION_TOKEN"]) # 토근이 없으면 에러 발생
+notion = Client(auth=os.environ["NOTION_TOKEN"])  # 토근이 없으면 에러 발생
+
 
 def get_name(memberId):
     """
@@ -19,19 +20,14 @@ def get_name(memberId):
     Returns:
         string: 멤버 이름
     """
-    page = notion.pages.retrieve(
-        **{
-            "page_id": memberId
-        }
-    )
+    page = notion.pages.retrieve(**{"page_id": memberId})
     page_properties = asyncio.run(async_getitem(page, "properties"))
 
     title = page_properties["이름"]["title"][0]["plain_text"]
     name = extract_name(title)
     return name
 
-if __name__ == '__main__':
-    name = get_name('4704411a-c7c6-463a-b693-a7576a53302e')
+
+if __name__ == "__main__":
+    name = get_name("4704411a-c7c6-463a-b693-a7576a53302e")
     print(name)
-
-

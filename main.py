@@ -4,6 +4,7 @@ import logging
 from get_diary import get_diary
 from create_habit import create_habit, update_diary
 
+
 def main():
     """
     확인이 필요한 모든 일기를 불러오고
@@ -11,14 +12,14 @@ def main():
     해당 일기의 모든 목표가 추가되었다면 '운영진 확인용' 체크박스에 체크합니다.
     """
     _ = load_dotenv(find_dotenv())
-    
+
     # 로그 세팅
-    logging.basicConfig(filename='1d1s_automation.log', level=logging.INFO)
+    logging.basicConfig(filename="1d1s_automation.log", level=logging.INFO)
 
     # 일기 불러오기
     diarys = get_diary(os.environ["DIARY_DATABASE"])
     logging.info(f"확인이 필요한 일기: {len(diarys)}개")
-    
+
     # 일기를 순회하며 목표 수행 업데이트
     for diary in diarys:
         _, success = create_habit(os.environ["HABIT_DATABASE"], diary)
@@ -28,5 +29,6 @@ def main():
         else:
             logging.warning("등록되지 않은 목표가 있습니다. 확인해주세요.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
