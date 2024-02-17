@@ -12,7 +12,7 @@ HABIT_DATABASE='5fa151cdd7bd4572ae0e9d9315037b94'" >> .env
 
 미니콘다 설치 해주세요. 설치 한 다음 아래 명령어로 콘다 가상환경을 생성, 실행해주세요.
 ```
-conda env create -f auto_py310.yaml
+conda env create -f environment.yml
 conda activate auto_py310
 ```
 
